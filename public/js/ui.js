@@ -8,7 +8,7 @@ const notesList = document.querySelector('#notes')
 
 function noteUI({ id, title, desc }) {
   const div = document.createElement('div')
-  div.className = 'card mb-2'
+  div.className = 'card mb-2 animate__animated animate__fadeInUp'
   div.dataset.id = id
   div.innerHTML = `
     <div class="card-body d-flex justify-content-between align-items-center">
