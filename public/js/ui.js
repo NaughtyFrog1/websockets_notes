@@ -2,7 +2,7 @@
  * Archivo que guarda las funciones para renderizar elementos
  */
 
-import { deleteNote } from './sockets.js'
+import { deleteNote, getNote } from './sockets.js'
 
 const notesList = document.querySelector('#notes')
 
@@ -27,11 +27,11 @@ function noteUI({ id, title, desc }) {
     </div>
   `
 
-  const btnDelete = div.querySelector('.deleteNote')
-  const btnUpdate = div.querySelector('.updateNote')
-
-  btnDelete.addEventListener('click', () => {
+  div.querySelector('.deleteNote').addEventListener('click', () => {
     deleteNote(div.dataset.id)
+  })
+  div.querySelector('.updateNote').addEventListener('click', () => {
+    getNote(div.dataset.id)
   })
 
   return div
@@ -46,4 +46,14 @@ export function renderNotes(notes) {
 
 export function appendNote(note) {
   notesList.append(noteUI(note))
+}
+
+export function updateForm(data) {
+  const title = document.querySelector('#title')
+  const description = document.querySelector('#description')
+  const noteForm = document.querySelector('#noteForm')
+
+  noteForm.dataset.noteId = data.id
+  title.value = data.title
+  description.value = data.desc
 }

@@ -1,11 +1,20 @@
-import { saveNote } from './sockets.js'
+import { saveNote, updateNote } from './sockets.js'
 
 const noteForm = document.querySelector('#noteForm')
 const noteTitle = document.querySelector('#title')
 const noteDesc = document.querySelector('#description')
-const notes = document.querySelector('#notes')
 
 noteForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  saveNote(noteTitle.value, noteDesc.value)
+
+  if (noteForm.dataset.noteId) {
+    updateNote(noteForm.dataset.noteId, noteTitle.value, noteDesc.value)
+    noteForm.dataset.noteId = ''
+  } else {
+    saveNote(noteTitle.value, noteDesc.value)
+  }
+
+  noteTitle.value = ''
+  noteDesc.value = ''
+  noteTitle.focus()
 })

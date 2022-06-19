@@ -17,14 +17,32 @@ io.on('connection', (socket) => {
   socket.emit('server:getNotes', notes)
 
   // Recibimos como parámetro del callback la información envíada por el cliente
-  socket.on('client:newNote', (data) => {
+  socket.on('client:saveNote', (data) => {
     const note = { id: uuid(), ...data }
     notes.push(note)
     socket.emit('server:getNewNote', note)
   })
 
   socket.on('client:deleteNote', (id) => {
-    notes = notes.filter(note => note.id !== id)
+    notes = notes.filter((note) => note.id !== id)
+    socket.emit('server:getNotes', notes)
+  })
+
+  socket.on('client:getNote', (id) => {
+    socket.emit(
+      'server:selectedNote',
+      notes.find((note) => note.id === id)
+    )
+  })
+
+  socket.on('client:updateNote', (updateNote) => {
+    notes = notes.map((note) => {
+      if (note.id === updateNote.id) {
+        note.title = updateNote.title
+        note.desc = updateNote.desc
+      }
+      return note
+    })
     socket.emit('server:getNotes', notes)
   })
 })
