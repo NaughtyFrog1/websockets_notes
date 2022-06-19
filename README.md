@@ -83,3 +83,6 @@ setTimeout(() => {
 - `io` es una variable global que viene desde *socket.io.js*.
 - `io` recibe la conexión con el servidor de websockets como parámetro, al no pasarle nada se conecta automáticamente al mismo servidor desde donde es llamado. Devuelve un objeto con la conexión al websocket del servidor
 - `io` crea el servidor para los sockets, pero las conexiones con cada cliente estan representadas por el parámetro `socket` en `io.on('connection', (socket) => {`. Por ello es que cuando queremos recibir un evento del cliente devemos hacerlo desde dentro de ese arrow funtion.
+
+
+Cuando hacemos `socket.emit()` estamos enviando un mensaje solo a ese cliente, si queremos enviarlo a todos los clientes que están conectados tenemso que hacer `io.emit()`

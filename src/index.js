@@ -20,12 +20,12 @@ io.on('connection', (socket) => {
   socket.on('client:saveNote', (data) => {
     const note = { id: uuid(), ...data }
     notes.push(note)
-    socket.emit('server:getNewNote', note)
+    io.emit('server:getNewNote', note)
   })
 
   socket.on('client:deleteNote', (id) => {
     notes = notes.filter((note) => note.id !== id)
-    socket.emit('server:getNotes', notes)
+    io.emit('server:getNotes', notes)
   })
 
   socket.on('client:getNote', (id) => {
@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
       }
       return note
     })
-    socket.emit('server:getNotes', notes)
+    io.emit('server:getNotes', notes)
   })
 })
 
