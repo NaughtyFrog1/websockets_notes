@@ -7,18 +7,25 @@ const app = express()
 const httpServer = http.createServer(app)
 const io = new WebSocket.Server(httpServer)
 
-const notes = []
+let notes = []
 
 app.use(express.static('public'))
 
 io.on('connection', (socket) => {
   console.log('Nueva conexión: ', socket.id)
 
+  socket.emit('server:getNotes', notes)
+
   // Recibimos como parámetro del callback la información envíada por el cliente
   socket.on('client:newNote', (data) => {
     const note = { id: uuid(), ...data }
     notes.push(note)
     socket.emit('server:getNewNote', note)
+  })
+
+  socket.on('client:deleteNote', (id) => {
+    notes = notes.filter(note => note.id !== id)
+    socket.emit('server:getNotes', notes)
   })
 })
 

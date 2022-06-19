@@ -1,21 +1,11 @@
-const socket = io()
+import { saveNote } from './sockets.js'
 
 const noteForm = document.querySelector('#noteForm')
 const noteTitle = document.querySelector('#title')
 const noteDesc = document.querySelector('#description')
-
-
+const notes = document.querySelector('#notes')
 
 noteForm.addEventListener('submit', (e) => {
   e.preventDefault()
-
-  // Pasamos como parametro el nombre del evento e información
-  socket.emit('client:newNote', {
-    title: noteTitle.value,
-    desc: noteDesc.value,
-  })
-
-  socket.on('server:getNewNote', (data) => {
-    console.log(data)
-  })
+  saveNote(noteTitle.value, noteDesc.value)
 })
