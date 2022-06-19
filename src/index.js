@@ -1,19 +1,24 @@
 import express from 'express'
 import http from 'http'
 import WebSocket from 'socket.io'
+import { v4 as uuid } from 'uuid'
 
 const app = express()
 const httpServer = http.createServer(app)
 const io = new WebSocket.Server(httpServer)
 
+const notes = []
+
 app.use(express.static('public'))
 
 io.on('connection', (socket) => {
   console.log('Nueva conexión: ', socket.id)
-  socket.emit(`ping`)
 
-  socket.on('timeout', () => {
-    console.log('Timeout on: ', socket.id)
+  // Recibimos como parámetro del callback la información envíada por el cliente
+  socket.on('client:newNote', (data) => {
+    const note = { id: uuid(), ...data }
+    notes.push(note)
+    socket.emit('server:getNewNote', note)
   })
 })
 

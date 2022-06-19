@@ -1,15 +1,21 @@
-// `io` recibe la conexión con el servidor de websockets como parámetro. Al no pasarle nada se conecta automáticamente al mismo servidor desde donde es servido.
-// `io` devuelve un objeto con la conexión a los websockets del servidor.
-
 const socket = io()
 
-socket.on()
+const noteForm = document.querySelector('#noteForm')
+const noteTitle = document.querySelector('#title')
+const noteDesc = document.querySelector('#description')
 
-socket.on('ping', () => {
-  console.log('escuchado')
+
+
+noteForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  // Pasamos como parametro el nombre del evento e información
+  socket.emit('client:newNote', {
+    title: noteTitle.value,
+    desc: noteDesc.value,
+  })
+
+  socket.on('server:getNewNote', (data) => {
+    console.log(data)
+  })
 })
-
-setTimeout(() => {
-  socket.emit('timeout')
-  console.log('timeout')
-}, 2000)
