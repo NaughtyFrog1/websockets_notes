@@ -47,8 +47,9 @@ io.on('connection', (socket) => {
   })
 })
 
-httpServer.listen(3000, () => {
+const PORT = process.env.PORT || 3000
+httpServer.listen(PORT, () => {
   console.log(
-    '\n\x1b[1m>>> \x1b[32mServer listening on \x1b[4mhttp://localhost:3000\x1b[0m\n\n'
+    `\n\x1b[1m>>> \x1b[32mServer listening on \x1b[4mhttp://localhost:${PORT}\x1b[0m\n\n`
   )
 })
