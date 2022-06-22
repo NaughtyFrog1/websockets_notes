@@ -72,5 +72,43 @@
         </button>
       </div>
     </section>
+
+    <section id="notesSection" class="d-none">
+      <nav class="navbar navbar-dark bg-dark mb-5">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Multi Notes App</span>
+          <span id="notesRoomUUID" class="text-light"></span>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <form class="card card-body shadow border-0" id="notesForm">
+              <h1 class="h3 mb-4">Add a note</h1>
+              <input
+                autofocus
+                class="form-control mb-3"
+                id="notesFormTitle"
+                name="title"
+                placeholder="Write a title"
+                type="text"
+              />
+              <textarea
+                class="form-control mb-3"
+                id="notesFormContent"
+                name="content"
+                placeholder="Write a description"
+                rows="3"
+              ></textarea>
+              <button type="submit" class="btn btn-dark">Send</button>
+            </form>
+          </div>
+          <div class="col-md-8">
+            <div class="py-4" id="notesNotesList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
