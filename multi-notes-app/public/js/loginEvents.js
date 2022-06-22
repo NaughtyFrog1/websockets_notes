@@ -1,4 +1,4 @@
-import { createRoom } from './socket.js'
+import { roomCreate } from './socket.js'
 import { formatUuidInput, renderErrors } from './ui.js'
 
 const loginInputUsername = document.querySelector('#loginUsername')
@@ -34,15 +34,13 @@ function handleInputRoomIdBlur(e) {
 }
 
 function handleBtnCreateClick() {
-  console.log('click!')
-
   const { data, errors } = validateUsername(loginInputUsername)
   renderErrors(errors, document.querySelector('#loginUsernameErrors'))
 
   if (errors.length > 0) return
 
   loginBtnCreate.disabled = true
-  createRoom(data)
+  roomCreate(data)
 }
 
 export function addLoginEvents() {
