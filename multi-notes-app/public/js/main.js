@@ -1,3 +1,4 @@
+import { createRoom } from './socket.js'
 import { formatUuidInput, renderErrors } from './ui.js'
 
 function validateUsername(input) {
@@ -41,6 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (errors.length > 0) return
 
     loginBtnCreate.disabled = true
-    // create room
+    createRoom(data)
   })
 })

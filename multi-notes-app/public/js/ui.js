@@ -9,6 +9,12 @@ export function formatUuidInput(e) {
   }
 }
 
-export function showErrors(errors, errorsElement) {
+export function renderErrors(errors, errorsElement) {
   errorsElement.innerText = errors.join('\n')
+}
+
+export function showNotesSection(roomUUID) {
+  document.querySelector('#loginSection').classList.add('d-none')
+  document.querySelector('#notesSection').classList.remove('d-none')
+  document.querySelector('#notesRoomUUID').innerText = roomUUID
 }

@@ -21,20 +21,20 @@ io.on('connection', (socket) => {
 
   socket.on('room:create', (username, callback) => {
     // TODO: Validar username (hacerlo en createRoom)
-    const { uuid, notes } = createRoom(username)
+    const { uuid, room } = createRoom(username)
     socketUsername = username
     roomUUID = uuid
     socket.join(roomUUID)
-    callback(roomUUID, notes)
+    callback(roomUUID, room)
   })
 
   socket.on('room:join', (uuid, username) => {
     // TODO: Validar uuid y username
     socketUsername = username
     roomUUID = uuid
-    joinRoom(roomUUID, username)
     socket.join(roomUUID)
-    callback(roomUUID, notes)
+    const room = joinRoom(roomUUID, username)
+    callback(roomUUID, room)
   })
 
   socket.on('note:create', (title, content) => {
