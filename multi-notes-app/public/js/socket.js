@@ -18,3 +18,17 @@ export function roomJoin(uuid, username) {
     renderNotes(room.notes)
   })
 }
+
+export function noteCreate(title, content) {
+  socket.emit('note:create', title, content)
+}
+
+export function noteRead() {}
+
+export function noteUpdate() {}
+
+export function noteDelete() {}
+
+socket.on('server:updateNotes', (notes) => {
+  renderNotes(notes)
+})

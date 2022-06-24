@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
   let roomUUID = ''
 
   socket.on('room:create', (username, callback) => {
-    // TODO: Validar username (hacerlo en createRoom)
+    // TODO: Validar username (hacerlo en createRoom) y verificar que no este conectado a otra sesión
     const { uuid, room } = createRoom(username)
     socketUsername = username
     roomUUID = uuid
@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
     callback(roomUUID, room)
   })
 
-  socket.on('room:join', (uuid, username) => {
+  socket.on('room:join', (uuid, username, callback) => {
     // TODO: Validar uuid y username
     socketUsername = username
     roomUUID = uuid
