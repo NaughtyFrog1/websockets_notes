@@ -27,8 +27,8 @@ export function noteRead() {}
 
 export function noteUpdate() {}
 
-export function noteDelete() {}
+export function noteDelete(uuid) {
+  socket.emit('note:delete', uuid)
+}
 
-socket.on('server:updateNotes', (notes) => {
-  renderNotes(notes)
-})
+socket.on('server:updateNotes', renderNotes)
