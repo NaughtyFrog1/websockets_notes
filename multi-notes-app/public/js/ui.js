@@ -43,7 +43,7 @@ function getLastEditStr(author, editor, lastEdit) {
   if (editor === '') {
     return `${author} on ${monthNames[date.getMonth()]} ${date.getDate() + 1}`
   } else {
-    return `${author} on ${monthNames[date.getMonth()]} ${
+    return `${editor} on ${monthNames[date.getMonth()]} ${
       date.getDate() + 1
     } (edited)`
   }
@@ -91,4 +91,14 @@ export function renderNotes(notes) {
   Object.keys(notes).forEach((noteUUID) => {
     notesList.append(renderNote(noteUUID, notes[noteUUID]))
   })
+}
+
+export function updateForm(noteUUID, title, content) {
+  const form = document.querySelector('#notesForm')
+  const formTitle = document.querySelector('#notesFormTitle')
+  const formContent = document.querySelector('#notesFormContent')
+
+  form.dataset.id = noteUUID
+  formTitle.value = title
+  formContent.value = content
 }

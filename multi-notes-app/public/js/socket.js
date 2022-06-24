@@ -1,5 +1,5 @@
 import { removeLoginEvents } from './loginEvents.js'
-import { renderNotes, showNotesSection } from './ui.js'
+import { renderNotes, showNotesSection, updateForm } from './ui.js'
 
 const socket = io()
 
@@ -23,9 +23,13 @@ export function noteCreate(title, content) {
   socket.emit('note:create', title, content)
 }
 
-export function noteRead() {}
+export function noteRead(uuid) {
+  socket.emit('note:read', uuid, updateForm)
+}
 
-export function noteUpdate() {}
+export function noteUpdate(uuid, title, content) {
+  socket.emit('note:update', uuid, title, content)
+}
 
 export function noteDelete(uuid) {
   socket.emit('note:delete', uuid)

@@ -43,6 +43,14 @@ export function createNote(roomUUID, title, content, author) {
   return rooms[roomUUID].notes
 }
 
+export function readNote(roomUUID, noteUUID) {
+  console.log({ roomUUID, noteUUID })
+  console.log('rooms[roomUUID]', rooms[roomUUID])
+  console.log('rooms[roomUUID][noteUUID]', rooms[roomUUID].notes[noteUUID])
+
+  return rooms[roomUUID].notes[noteUUID]
+}
+
 export function updateNote(roomUUID, noteUUID, title, content, editor) {
   rooms[roomUUID].notes[noteUUID] = {
     ...rooms[roomUUID].notes[noteUUID],

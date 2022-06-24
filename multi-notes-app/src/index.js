@@ -6,6 +6,7 @@ import {
   createRoom,
   deleteNote,
   joinRoom,
+  readNote,
   updateNote,
 } from './handlers/handlerRooms'
 
@@ -41,6 +42,11 @@ io.on('connection', (socket) => {
     // TODO: Validar title y content
     const updatedNotes = createNote(roomUUID, title, content, socketUsername)
     io.to(roomUUID).emit('server:updateNotes', updatedNotes)
+  })
+
+  socket.on('note:read', (noteUUID, callback) => {
+    const { title, content } = readNote(roomUUID, noteUUID)
+    callback(noteUUID, title, content)
   })
 
   socket.on('note:update', (noteUUID, title, content) => {
